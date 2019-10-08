@@ -80,6 +80,7 @@ public Ball(int cWidth, int cHeight) {
  public void update() {
      x += vx;
      y += vy;
+     this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
  }
  
 }

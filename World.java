@@ -30,7 +30,7 @@ public class World extends JPanel {
         opponent = new Opponent(800, 600);
         ball = new Ball(800,600);
         timer = new Timer();
-        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/12);
+        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/80);
     }
 
     @Override
@@ -73,6 +73,12 @@ public class World extends JPanel {
            ball.setVx(-ball.getVx());
         }
         if(player.getBounds().intersects(ball.getBounds())){
+           ball.setVy(-ball.getVy());
+        }
+         if(opponent.getBounds().intersects(ball.getBounds())){
+           ball.setVx(-ball.getVx());
+        }
+        if(opponent.getBounds().intersects(ball.getBounds())){
            ball.setVy(-ball.getVy());
         }
     }

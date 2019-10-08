@@ -32,7 +32,7 @@ public class Player {
         this.xp = 0;
         this.score = 0;
         this.color = Color.WHITE;
-        this.bounds = new Rectangle(this.width, this.height);
+        this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     
