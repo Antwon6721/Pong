@@ -30,7 +30,7 @@ public class Opponent {
         this.height = 40;
         this.xp = 0;
         this.score = 0;
-        this.color = Color.BLUE;
+        this.color = Color.WHITE;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
     }
     

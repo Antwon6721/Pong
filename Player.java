@@ -15,7 +15,7 @@ import java.awt.Rectangle;
  * @author 641580
  */
 public class Player {
-    private int height, width, x, y, vx, vy, hp, xp, score;
+    private int height, width, x, y, vy, hp, xp, score;
     private Rectangle bounds;
     private Color color;
     private final int SPEED = 15;
@@ -26,15 +26,15 @@ public class Player {
     public Player(int cWidth, int cHeight) {
         this.x = 35;
         this.y = cHeight / 2;
-        this.vx = 0;
         this.vy = 0;
         this.width = 10;
         this.height = 40;
         this.xp = 0;
         this.score = 0;
-        this.color = Color.BLUE;
-        this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
+        this.color = Color.WHITE;
+        this.bounds = new Rectangle(this.width, this.height);
     }
+
     
     public int getWidth() {
         return width;
@@ -71,7 +71,11 @@ public class Player {
     public Rectangle getBounds() {
         return bounds;
     }
-
+    
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+    
     public int getScore() {
         return score;
     }
@@ -96,13 +100,11 @@ public class Player {
     }
     
     public void update() {
-        this.x += vx;
         this.y += vy;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     public void stop() {
-        this.vx = 0;
         this.vy = 0;
     }
 }
