@@ -30,7 +30,7 @@ public class World extends JPanel {
         opponent = new Opponent(800, 600);
         ball = new Ball(800,600);
         timer = new Timer();
-        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/80);
+        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/60);
     }
 
     @Override
@@ -40,7 +40,9 @@ public class World extends JPanel {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 1440, 840);
         opponent.draw(g);
+        //opponent.drawScore(g);
         player.draw(g);
+        //player.drawScore(g);
         ball.draw(g);
     }
 
@@ -57,29 +59,33 @@ public class World extends JPanel {
         }
     }
     public void checkCollisions(){
-        if (ball.getX() < 0) {
+        if (ball.getX() < 0 || ball.getX() + ball.getWidth() > 1440) {
             ball.setVx(-ball.getVx());
+        }
+        if (ball.getY() < 0 || ball.getY() + ball.getHeight() > 840) {
+            ball.setVy(-ball.getVy());
+        }
+        if (player.getY() < 0 || player.getY() + player.getHeight() > 840) {
+            player.setVy(player.getVy() - player.getVy());
+        }
+        if((player.getBounds().intersects(ball.getBounds())) || (opponent.getBounds().intersects(ball.getBounds()))){
+           ball.setVx(-ball.getVx());
+           ball.setVy((int)Math.random() * 5 - 2 );
+           if (ball.getVx() > 0) {
+               ball.setVx(ball.getVx() + 1);
+           }
+           else {
+               ball.setVx(ball.getVx() - 1);
+           }
+          
         }
         if (ball.getX() + ball.getWidth() > 1440) {
-            ball.setVx(-ball.getVx());
+            player.setScore(player.getScore() + 1);
+            System.out.println("player score: "+ player.getScore());
         }
-        if (ball.getY() < 0) {
-            ball.setVy(-ball.getVy());
-        }
-        if (ball.getY() + ball.getHeight() > 840) {
-            ball.setVy(-ball.getVy());
-        }
-        if(player.getBounds().intersects(ball.getBounds())){
-           ball.setVx(-ball.getVx());
-        }
-        if(player.getBounds().intersects(ball.getBounds())){
-           ball.setVy(-ball.getVy());
-        }
-         if(opponent.getBounds().intersects(ball.getBounds())){
-           ball.setVx(-ball.getVx());
-        }
-        if(opponent.getBounds().intersects(ball.getBounds())){
-           ball.setVy(-ball.getVy());
+        if (ball.getX() < 0) {
+            opponent.setScore(opponent.getScore() + 1);
+            System.out.println("opponent score: "+ opponent.getScore());
         }
     }
 

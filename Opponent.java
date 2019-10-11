@@ -18,7 +18,7 @@ public class Opponent {
      private int height, width, x, y, vx, vy, hp, xp, score;
     private Rectangle bounds;
     private Color color;
-    private final int SPEED = 15;
+    private final int SPEED = 10;
     private boolean alive;
     
     public Opponent(int cWidth, int cHeight) {
@@ -33,6 +33,7 @@ public class Opponent {
         this.color = Color.WHITE;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
     }
+
     
     public int getWidth() {
         return width;
@@ -92,7 +93,12 @@ public class Opponent {
         Graphics2D g2d = (Graphics2D) g;
         g.fillRect(x, y, width, height);
     }
-    
+    /*public void drawScore(Graphics g) {
+        g.setColor(this.color);
+        Graphics2D g2d = (Graphics2D) g;
+        g.drawString("0", 10, 10);
+    }
+    */
     public void update() {
         this.x += vx;
         this.y += vy;

@@ -22,7 +22,7 @@ public class Ball {
 public Ball(int cWidth, int cHeight) {
         this.x = 200;
         this.y = cHeight / 2;
-        this.vx = ((int)Math.random()+1*5);
+        this.vx = 5;
         this.vy = ((int)Math.random()+1*5);
         this.width = 10;
         this.height = 10;
