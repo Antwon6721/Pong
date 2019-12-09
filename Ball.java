@@ -22,8 +22,8 @@ public class Ball {
 public Ball(int cWidth, int cHeight) {
         this.x = 200;
         this.y = cHeight / 2;
-        this.vx = 5;
-        this.vy = ((int)Math.random()+1*5);
+        this.vx = 720;
+        this.vy = 420;
         this.width = 10;
         this.height = 10;
         this.color = Color.WHITE;
@@ -38,6 +38,9 @@ public Ball(int cWidth, int cHeight) {
         this.bounds = bounds;
     }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     public int getHeight() {
         return height;
@@ -46,14 +49,27 @@ public Ball(int cWidth, int cHeight) {
     public int getWidth() {
         return width;
     }
-
+    
+    public void setWidth(int width) {
+        this.width = width;
+    }
     public int getX() {
         return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return y;
     }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+   
 
     public int getVx() {
         return vx;

@@ -15,11 +15,10 @@ import java.awt.Rectangle;
  * @author 641580
  */
 public class Player {
-    private int height, width, x, y, vy, hp, xp, score;
+    private int height, width, x, y, vy,score,powerPoints;
     private Rectangle bounds;
     private Color color;
     private final int SPEED = 10;
-    private boolean alive;
     
     
     //Constructor
@@ -29,10 +28,18 @@ public class Player {
         this.vy = 0;
         this.width = 10;
         this.height = 40;
-        this.xp = 0;
         this.score = 0;
+        this.powerPoints = 0;
         this.color = Color.WHITE;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
+    }
+
+    public int getPowerPoints() {
+        return powerPoints;
+    }
+
+    public void setPowerPoints(int powerPoints) {
+        this.powerPoints = powerPoints;
     }
 
     public int getVy() {

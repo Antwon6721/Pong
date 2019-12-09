@@ -15,7 +15,7 @@ import java.awt.Rectangle;
  * @author Anthony Hall
  */
 public class Opponent {
-     private int height, width, x, y, vx, vy, hp, xp, score;
+     private int height, width, x, y, vx, vy, score, powerPoints;
     private Rectangle bounds;
     private Color color;
     private final int SPEED = 10;
@@ -28,13 +28,20 @@ public class Opponent {
         this.vy = 0;
         this.width = 10;
         this.height = 40;
-        this.xp = 0;
         this.score = 0;
+        this.powerPoints = 0;
         this.color = Color.WHITE;
         this.bounds = new Rectangle(this.x, this.y, this.width, this.height);
     }
 
-    
+    public int getPowerPoints() {
+        return powerPoints;
+    }
+
+    public void setPowerPoints(int powerPoints) {
+        this.powerPoints = powerPoints;
+    }
+
     public int getWidth() {
         return width;
     }
