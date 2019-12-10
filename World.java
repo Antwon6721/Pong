@@ -35,7 +35,9 @@ public class World extends JPanel {
         
         
     }
-
+public int y = 0;
+public int q = 0;
+public int x = 0;
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -49,11 +51,18 @@ public class World extends JPanel {
         g.drawString("" + player.getScore(), 10, 14);
         g.drawString("power points:" + player.getPowerPoints(), 30, 800);
         ball.draw(g);
-         if (ball.getVx() == 0 & ball.getVy() == 0){
+        if (x > 0){
             g.drawString("press space to play",670,520);
         } 
+         
+        if (q <= 0){
+            g.drawString("what would you like your Score limit to be press 1 for 5, press 2 for 10, or press 3 for unlimitied", 465, 500);
+        }
         if (paused == true){
             g.drawString("Paused press p to play",670,520);
+        }
+         if (paused == true){
+            g.drawString("Press R to Restart",670,500);
         }
         if (opponent.getPowerPoints() >= 6){
             g.drawString("press left arrow to use speed ball", 1220, 770);
@@ -73,6 +82,20 @@ public class World extends JPanel {
         if (player.getPowerPoints() >= 12){
             g.drawString("press E to use Small ball", 30, 750);
         }
+        if(y >= 1){
+        if (opponent.getScore() == maxScore){
+            g.drawString("player 2 wins", 690, 200);
+            g.drawString("press Q to play again", 670, 250);
+        }
+         if (player.getScore() == maxScore){
+            g.drawString("player 1 wins", 690, 200);
+            g.drawString("press Q to play again", 670, 250);
+        }
+        }
+         
+//         if (y >= 2){
+//            g.drawString("press Q to play agian", 670, 520);
+//        }
     }
 
     private class ScheduleTask extends TimerTask {
@@ -86,11 +109,29 @@ public class World extends JPanel {
             }
             repaint();
             checkCollisions();
-            powerUps();
         }
     }
     public int i = 0;
+    public int maxScore;
     public void checkCollisions(){
+        if(player.getScore() == maxScore){
+                ball.setVx(0);
+                ball.setVy(0);
+                ball.setX(720);
+                ball.setY(420);
+                player.setPowerPoints(0);
+                opponent.setPowerPoints(0);
+                
+            }
+            if(opponent.getScore() == maxScore){
+                ball.setVx(0);
+                ball.setVy(0);
+                ball.setX(720);
+                ball.setY(420);
+                player.setPowerPoints(0);
+                opponent.setPowerPoints(0);
+                
+            }
         if (ball.getX() < 0 || ball.getX() + ball.getWidth() > 1440) {
             ball.setVx(-ball.getVx());
         }
@@ -142,12 +183,8 @@ public class World extends JPanel {
         }
         
         if (ball.getX() + ball.getWidth() > 1440) {
-            if (i > 0) {
             player.setScore(player.getScore() + 1); 
             player.setPowerPoints(player.getPowerPoints() + 2);
-            }
-            i++;
-           
             ball.setVx(0);
             ball.setVy(0);
             ball.setX(720);
@@ -162,12 +199,6 @@ public class World extends JPanel {
             ball.setY(420);
         }
     }
-    
-    public void powerUps() {
-       
-    }
-    
-    
     public void togglePaused() {
         if (paused) {
             paused = false;
@@ -178,6 +209,31 @@ public class World extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
+        if ( player.getScore() == maxScore || player.getScore() == maxScore && e.getKeyCode() == KeyEvent.VK_Q){
+                player.setScore(0);
+                opponent.setScore(0);
+                q = 0;
+                x = 0;
+        }
+      
+        if ( e.getKeyCode() == KeyEvent.VK_1){
+            maxScore = 5;
+            y+=1;
+            q++;
+            x++;
+        }
+         if (e.getKeyCode() == KeyEvent.VK_2){
+            maxScore = 10;
+            y+=1;
+            q++;
+            x++;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_3){
+            maxScore = -1;
+            y+=1;
+            q++;
+            x++;
+        }
         if (player.getPowerPoints() >=16 && e.getKeyCode() == KeyEvent.VK_X){
             ball.setVx(ball.getVx()*2);
             ball.setVy(ball.getVy()*2);
@@ -212,10 +268,22 @@ public class World extends JPanel {
             ball.setVy(ball.getVy()*2);
             opponent.setPowerPoints(opponent.getPowerPoints() - 6);
         }
+        if (paused == true && e.getKeyCode() == KeyEvent.VK_R){
+            player.setScore(0);
+            opponent.setScore(0);
+            ball.setX(720);
+            ball.setY(420);
+            ball.setVx(0);
+            ball.setVy(0);
+            player.setPowerPoints(0);
+            opponent.setPowerPoints(0);
+            paused = false;
+        }
         if(ball.getVx() == 0){  
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 ball.setVx(5);
                 ball.setVy((int) ((Math.random() * 9) - 4));
+                x = 0;
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_P){
