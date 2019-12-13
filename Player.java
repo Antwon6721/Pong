@@ -18,7 +18,7 @@ public class Player {
     private int height, width, x, y, vy,score,powerPoints;
     private Rectangle bounds;
     private Color color;
-    private final int SPEED = 10;
+    private final int SPEED = 5;
     
     
     //Constructor

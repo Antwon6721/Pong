@@ -38,6 +38,7 @@ public class World extends JPanel {
 public int y = 0;
 public int q = 0;
 public int x = 0;
+public int k = 0;
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -82,20 +83,19 @@ public int x = 0;
         if (player.getPowerPoints() >= 12){
             g.drawString("press E to use Small ball (cost:12)", 30, 750);
         }
-        if(y >= 1){
+        if (y >= 1){
+            if (player.getScore() == maxScore){
+                g.drawString("player 1 wins", 690, 200);
+               g.drawString("press Q to play again", 670, 250);
+            } 
+            
+        }
+        if (k >= 1){
         if (opponent.getScore() == maxScore){
-            g.drawString("player 2 wins", 690, 200);
-            g.drawString("press Q to play again", 670, 250);
+                g.drawString("player 2 wins", 690, 200);
+                g.drawString("press Q to play again", 670, 250);
+            }
         }
-         if (player.getScore() == maxScore){
-            g.drawString("player 1 wins", 690, 200);
-            g.drawString("press Q to play again", 670, 250);
-        }
-        }
-         
-//         if (y >= 2){
-//            g.drawString("press Q to play agian", 670, 520);
-//        }
     }
 
     private class ScheduleTask extends TimerTask {
@@ -201,7 +201,9 @@ public int x = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
-            x++;
+            if (player.getScore()!= maxScore){
+              x++;  
+            }
         }
         if (ball.getX() < 0) {
             opponent.setScore(opponent.getScore() + 1);
@@ -210,7 +212,9 @@ public int x = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
-            x++;
+            if (opponent.getScore()!= maxScore){
+              x++;  
+            }  
         }
     }
     public void togglePaused() {
@@ -223,30 +227,29 @@ public int x = 0;
     }
 
     public void keyPressed(KeyEvent e) {
-        if ( player.getScore() == maxScore || player.getScore() == maxScore && e.getKeyCode() == KeyEvent.VK_Q){
+        if ( player.getScore() == maxScore || opponent.getScore() == maxScore && e.getKeyCode() == KeyEvent.VK_Q){
                 player.setScore(0);
                 opponent.setScore(0);
                 q = 0;
-                x = 0;
+                x += 0;
         }
       
         if ( e.getKeyCode() == KeyEvent.VK_1){
             maxScore = 5;
             y+=1;
+            k+=1;
             q++;
             x++;
         }
          if (e.getKeyCode() == KeyEvent.VK_2){
             maxScore = 10;
             y+=1;
+            k+=1;
             q++;
             x++;
         }
         if (e.getKeyCode() == KeyEvent.VK_3){
             maxScore = -1;
-            y+=1;
-            q++;
-            x++;
         }
         if (player.getPowerPoints() >=16 && e.getKeyCode() == KeyEvent.VK_X){
             ball.setVx(ball.getVx()*2);
@@ -293,11 +296,13 @@ public int x = 0;
             opponent.setPowerPoints(0);
             paused = false;
         }
-        if(ball.getVx() == 0){  
-            if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                ball.setVx((int)(Math.random()+1*3));
-                ball.setVy((int) ((Math.random() * 9) - 4));
-                x = 0;
+        if(x>0){
+            if(ball.getVx() == 0){  
+                if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                    ball.setVx((int)(Math.random()+1*3));
+                    ball.setVy((int) ((Math.random() * 9) - 4));
+                    x = 0;
+                }
             }
         }
         if(e.getKeyCode() == KeyEvent.VK_P){

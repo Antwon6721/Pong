@@ -18,7 +18,7 @@ public class Opponent {
      private int height, width, x, y, vx, vy, score, powerPoints;
     private Rectangle bounds;
     private Color color;
-    private final int SPEED = 10;
+    private final int SPEED = 5;
     private boolean alive;
     
     public Opponent(int cWidth, int cHeight) {
