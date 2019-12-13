@@ -22,8 +22,8 @@ public class Ball {
 public Ball(int cWidth, int cHeight) {
         this.x = 200;
         this.y = cHeight / 2;
-        this.vx = 720;
-        this.vy = 420;
+        this.vx = 0;
+        this.vy = 0;
         this.width = 10;
         this.height = 10;
         this.color = Color.WHITE;

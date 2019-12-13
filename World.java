@@ -31,7 +31,7 @@ public class World extends JPanel {
         opponent = new Opponent(800, 600);
         ball = new Ball(800,600);
         timer = new Timer();
-        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/30);
+        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/60);
         
         
     }
@@ -65,22 +65,22 @@ public int x = 0;
             g.drawString("Press R to Restart",670,500);
         }
         if (opponent.getPowerPoints() >= 6){
-            g.drawString("press left arrow to use speed ball", 1220, 770);
+            g.drawString("press left arrow to use speed ball (cost:6)", 1180, 770);
         }
          if (opponent.getPowerPoints() >= 16){
-            g.drawString("press Enter to use combined powers", 1220, 730);
+            g.drawString("press Enter to use combined powers (cost:16)", 1180, 730);
         }
          if (player.getPowerPoints() >= 16){
-            g.drawString("press X to use combined", 30, 730);
+            g.drawString("press X to use combined (cost:16)", 30, 730);
         }
         if (player.getPowerPoints() >= 6){
-            g.drawString("press D to use speed ball", 30, 770);
+            g.drawString("press D to use speed ball (cost:6)", 30, 770);
         }
         if (opponent.getPowerPoints() >= 12){
-            g.drawString("press right arrow to use Small ball", 1220, 750);
+            g.drawString("press right arrow to use Small ball (cost:12)", 1180, 750);
         }
         if (player.getPowerPoints() >= 12){
-            g.drawString("press E to use Small ball", 30, 750);
+            g.drawString("press E to use Small ball (cost:12)", 30, 750);
         }
         if(y >= 1){
         if (opponent.getScore() == maxScore){
@@ -111,6 +111,7 @@ public int x = 0;
             checkCollisions();
         }
     }
+    public int t = 0;
     public int i = 0;
     public int maxScore;
     public void checkCollisions(){
@@ -143,17 +144,28 @@ public int x = 0;
         }
          if (player.getBounds().intersects(ball.getBounds())){
              ball.setVx(-5);
+             if(t >= 6){
+                 ball.setVx(ball.getVx()-1);
+                 t++;
+             }
          }
         if (opponent.getBounds().intersects(ball.getBounds())){
-             ball.setVx(5);
+             ball.setVx(3);
+              if(t >= 6){
+                 ball.setVx(ball.getVx()+1);
+                 t++;
          }
+              if(t>=7){
+                  t = 0;
+              }
+        }
         if((player.getBounds().intersects(ball.getBounds())) || (opponent.getBounds().intersects(ball.getBounds()))){
            
-            if(ball.getVx() > 5 ){   
-                ball.setVx(5);
+            if(ball.getVx() > 3 ){   
+                ball.setVx(3);
             } 
-            else if (ball.getVx() < -5) {
-                ball.setVx(-5);
+            else if (ball.getVx() < -3) {
+                ball.setVx(-3);
             }
             ball.setVx(-ball.getVx());
             int[] speed = new int[9];
@@ -189,6 +201,7 @@ public int x = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
+            x++;
         }
         if (ball.getX() < 0) {
             opponent.setScore(opponent.getScore() + 1);
@@ -197,6 +210,7 @@ public int x = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
+            x++;
         }
     }
     public void togglePaused() {
@@ -281,7 +295,7 @@ public int x = 0;
         }
         if(ball.getVx() == 0){  
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
-                ball.setVx(5);
+                ball.setVx((int)(Math.random()+1*3));
                 ball.setVy((int) ((Math.random() * 9) - 4));
                 x = 0;
             }
