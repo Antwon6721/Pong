@@ -201,6 +201,8 @@ public int k = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
+            player.setY(300);
+            opponent.setY(300);
             if (player.getScore()!= maxScore){
               x++;  
             }
@@ -212,6 +214,8 @@ public int k = 0;
             ball.setVy(0);
             ball.setX(720);
             ball.setY(420);
+            player.setY(300);
+            opponent.setY(300);
             if (opponent.getScore()!= maxScore){
               x++;  
             }  
@@ -230,6 +234,8 @@ public int k = 0;
         if ( player.getScore() == maxScore || opponent.getScore() == maxScore && e.getKeyCode() == KeyEvent.VK_Q){
                 player.setScore(0);
                 opponent.setScore(0);
+                player.setY(300);
+                opponent.setY(300);
                 q = 0;
                 x += 0;
         }
