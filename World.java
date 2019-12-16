@@ -59,12 +59,15 @@ public int k = 0;
         if (q <= 0){
             g.drawString("what would you like your Score limit to be press 1 for 5, press 2 for 10, or press 3 for unlimitied", 465, 500);
         }
-        if (paused == true){
-            g.drawString("Paused press p to play",670,520);
+        if (ball.getVx() > 0){
+            if (paused == true){
+                g.drawString("Paused press P to play",670,520);
+            }
+            if (paused == true){
+                g.drawString("Press R to Restart",670,500);
+            }
         }
-         if (paused == true){
-            g.drawString("Press R to Restart",670,500);
-        }
+       
         if (opponent.getPowerPoints() >= 6){
             g.drawString("press left arrow to use speed ball (cost:6)", 1180, 770);
         }
@@ -102,6 +105,9 @@ public int k = 0;
 
         @Override
         public void run() {
+            if(ball.getVx()<=0){
+                paused = false;
+            }
            if (paused == false) { 
                opponent.update();
                player.update();
@@ -320,7 +326,6 @@ public int k = 0;
         else if (e.getKeyCode() == KeyEvent.VK_S) {
             player.move("down");
         }
-        
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             opponent.move("up");
         }
