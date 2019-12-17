@@ -121,16 +121,7 @@ public int k = 0;
     public int i = 0;
     public int maxScore;
     public void checkCollisions(){
-        if(player.getScore() == maxScore){
-                ball.setVx(0);
-                ball.setVy(0);
-                ball.setX(720);
-                ball.setY(420);
-                player.setPowerPoints(0);
-                opponent.setPowerPoints(0);
-                
-            }
-            if(opponent.getScore() == maxScore){
+        if(player.getScore() == maxScore || opponent.getScore() == maxScore){
                 ball.setVx(0);
                 ball.setVy(0);
                 ball.setX(720);
@@ -262,6 +253,10 @@ public int k = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_3){
             maxScore = -1;
+            y+=1;
+            k+=1;
+            q++;
+            x++;
         }
      }
         if (player.getPowerPoints() >=16 && e.getKeyCode() == KeyEvent.VK_X){
