@@ -245,7 +245,7 @@ public int k = 0;
                 q = 0;
                 x += 0;
         }
-      
+     if (ball.getVx() <= 0){
         if ( e.getKeyCode() == KeyEvent.VK_1){
             maxScore = 5;
             y+=1;
@@ -263,6 +263,7 @@ public int k = 0;
         if (e.getKeyCode() == KeyEvent.VK_3){
             maxScore = -1;
         }
+     }
         if (player.getPowerPoints() >=16 && e.getKeyCode() == KeyEvent.VK_X){
             ball.setVx(ball.getVx()*2);
             ball.setVy(ball.getVy()*2);
