@@ -245,7 +245,7 @@ public int k = 0;
                 q = 0;
                 x += 0;
         }
-     if (ball.getVx() <= 0){
+     if (ball.getVx() <= 0 && ball.getVy() <= 0){
         if ( e.getKeyCode() == KeyEvent.VK_1){
             maxScore = 5;
             y+=1;
